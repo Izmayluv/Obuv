@@ -22,17 +22,18 @@ namespace Obuv.Views
             labelUserName.Text += Authorization.GetUserSurname + "\n";
             labelUserName.Text += Authorization.GetUserRole;
 
-            comboBoxCategories.Items.Add("Все категории");
+            comboBoxCategories.Items.Add("Не учитывать категорию");
             var categories = Helper.DbContext.Categories.Select(x => x.categoryName).ToList();
             foreach (var category in categories)
             {
                 comboBoxCategories.Items.Add(category);
             }
 
+            comboBoxSort.Items.Add("Не учитывать сортировку");
             comboBoxSort.Items.Add("По возрастанию");
             comboBoxSort.Items.Add("По убыванию");
 
-            comboBoxDiscount.Items.Add("Не учитывается");
+            comboBoxDiscount.Items.Add("Не учитывать скидку");
             comboBoxDiscount.Items.Add("От 0 до 10");
             comboBoxDiscount.Items.Add("От 10 до 15");
             comboBoxDiscount.Items.Add("От 15 до 100");
@@ -47,21 +48,49 @@ namespace Obuv.Views
 
         private void LoadAllProductsToGrid()
         {
-           var products = Helper.DbContext.Products;
+            var products = Helper.DbContext.Products.ToList();
 
-            for (int i = 0; i < Helper.DbContext.Products.Count(); i++)
+            switch (comboBoxCategories.SelectedIndex)
             {
-                if (i != Helper.DbContext.Products.Count() - 1)
-                {
-                    dataGridView1.Rows.Add();
-                }
+                default:
+                    break;
+
+                case 1:
+                    products = products.Where(x => x.productCategory == 1).ToList();
+                    break;
+
+                case 2:
+                    products = products.Where(x => x.productCategory == 2).ToList();
+                    break;
+            }
+
+            switch (comboBoxDiscount.SelectedIndex)
+            {
+                default:
+                    break;
+            }
+
+            switch (comboBoxSort.SelectedIndex)
+            {
+                default:
+                    break;
+
+                case 1:
+                    products = products.OrderBy(x => x.productCost).ToList();
+                    break;
+
+                case 2:
+                    products = products.OrderByDescending(x => x.productCost).ToList();
+                    break;
+            }
+
+            for (int i = 0; i < products.Count(); i++)
+            {
+                if (i != products.Count() - 1) dataGridView1.Rows.Add();
 
                 picName = products.Select(x => x.productPicture).ToArray()[i];
 
-                if (String.IsNullOrEmpty(picName))
-                {
-                    bitmap = Resources.defPic;
-                }
+                if (String.IsNullOrEmpty(picName)) bitmap = Resources.defPic;
 
                 if (!String.IsNullOrEmpty(picName))
                 {
@@ -95,6 +124,23 @@ namespace Obuv.Views
         private void labelUserName_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void comboBoxCategories_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+            LoadAllProductsToGrid();
+        }
+
+        private void comboBoxDiscount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxSort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+            LoadAllProductsToGrid();
         }
     }
 }
