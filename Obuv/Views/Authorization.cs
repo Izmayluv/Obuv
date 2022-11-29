@@ -27,12 +27,12 @@ namespace Obuv
                 .Where(x => x.userLogin == login && x.userPassword == password)
                 .FirstOrDefault();
 
-            userSurname = customer.userSurname;
-            userPatronymic = customer.userPatronymic;
-            userName = customer.userName;
-
             if (customer != null)
             {
+                userSurname = customer.userSurname;
+                userPatronymic = customer.userPatronymic;
+                userName = customer.userName;
+
                 var staffRole = Helper.DbContext.StaffRoles
                     .Where(x => x.roleID == customer.userRole)
                     .FirstOrDefault();

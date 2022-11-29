@@ -1,4 +1,5 @@
 ﻿using Obuv.Classes;
+using Obuv.Entities;
 using Obuv.Properties;
 using System;
 using System.Data;
@@ -38,19 +39,22 @@ namespace Obuv.Views
             comboBoxDiscount.Items.Add("От 10 до 15");
             comboBoxDiscount.Items.Add("От 15 до 100");
 
-            LoadAllProductsToGrid();
+            LoadProductsToGrid();
 
         }
 
         private Bitmap bitmap;
-        private string path = @"C:\Users\pixam\source\repos\Obuv\Obuv\Resources\";
+        private string path = @"C:\Users\ones\source\repos\gitfolder\Obuv\Obuv\Resources\";
         private string picName;
 
-        private void LoadAllProductsToGrid()
+        private void LoadProductsToGrid()
         {
             var products = Helper.DbContext.Products.ToList();
 
-            switch (comboBoxCategories.SelectedIndex)
+            if (!String.IsNullOrEmpty(textBoxSearch.Text)) 
+                products = products.Where(x => x.productName.Contains(textBoxSearch.Text)).ToList();
+
+                switch (comboBoxCategories.SelectedIndex)
             {
                 default:
                     break;
@@ -67,6 +71,18 @@ namespace Obuv.Views
             switch (comboBoxDiscount.SelectedIndex)
             {
                 default:
+                    break;
+
+                case 1:
+                    products = products.Where(x => x.productActiveDiscountAmount > 0 && x.productActiveDiscountAmount < 3).ToList();
+                    break;
+
+                case 2:
+                    products = products.Where(x => x.productActiveDiscountAmount > 0 && x.productActiveDiscountAmount < 4).ToList();
+                    break;
+
+                case 3:
+                    products = products.Where(x => x.productActiveDiscountAmount > 3 && x.productActiveDiscountAmount < 6).ToList();
                     break;
             }
 
@@ -86,11 +102,16 @@ namespace Obuv.Views
 
             for (int i = 0; i < products.Count(); i++)
             {
-                if (i != products.Count() - 1) dataGridView1.Rows.Add();
+                if (i != products.Count() - 1) 
+                    dataGridView1.Rows.Add();
 
                 picName = products.Select(x => x.productPicture).ToArray()[i];
 
-                if (String.IsNullOrEmpty(picName)) bitmap = Resources.defPic;
+                if (!picName.Contains(".jpg")) 
+                    picName += ".jpg";
+
+                if (String.IsNullOrEmpty(picName)) 
+                    bitmap = Resources.defPic;
 
                 if (!String.IsNullOrEmpty(picName))
                 {
@@ -107,6 +128,7 @@ namespace Obuv.Views
                     $"Скидка: { Round((decimal)products.Select(x => x.productActiveDiscountAmount).ToArray()[i],0) }\n" +
                     $"Цена со скидкой: { Round((decimal)(products.Select(x => x.productCost).ToArray()[i] - products.Select(x => x.productCost).ToArray()[i] * products.Select(x => x.productActiveDiscountAmount).ToArray()[i] / 100), 0) }\n";
             }
+
             PrintCountOfRows();
         }
 
@@ -121,26 +143,36 @@ namespace Obuv.Views
             return x;
         }
 
-        private void labelUserName_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void comboBoxCategories_SelectedIndexChanged(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
-            LoadAllProductsToGrid();
+            LoadProductsToGrid();
         }
 
         private void comboBoxDiscount_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            dataGridView1.Rows.Clear();
+            LoadProductsToGrid();
         }
 
         private void comboBoxSort_SelectedIndexChanged(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
-            LoadAllProductsToGrid();
+            LoadProductsToGrid();
+        }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            Authorization authorization = new Authorization();
+
+            this.Hide();
+            authorization.Show();
+        }
+
+        private void textBoxSearch_TextChanged(object sender, EventArgs e)
+        {
+                dataGridView1.Rows.Clear();
+                LoadProductsToGrid();
         }
     }
 }
