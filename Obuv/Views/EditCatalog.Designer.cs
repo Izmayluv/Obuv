@@ -1,6 +1,6 @@
 ﻿namespace Obuv.Views
 {
-    partial class Catalog
+    partial class EditCatalog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Catalog));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.labelUserName = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.Column2 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelProdCount = new System.Windows.Forms.Label();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
@@ -44,14 +41,17 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.buttonBack = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.Article = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Picture = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelUserName
@@ -67,45 +67,23 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.dataGridView1.ColumnHeadersHeight = 34;
             this.dataGridView1.ColumnHeadersVisible = false;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column2,
-            this.Column1});
+            this.Article,
+            this.Picture,
+            this.Description});
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.dataGridView1.Location = new System.Drawing.Point(4, 180);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 62;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(1197, 600);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // Column2
-            // 
-            this.Column2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle1.NullValue")));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column2.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Column2.HeaderText = "Column2";
-            this.Column2.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
-            this.Column2.MinimumWidth = 8;
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 27;
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column1.DefaultCellStyle = dataGridViewCellStyle2;
-            this.Column1.HeaderText = "Column1";
-            this.Column1.MinimumWidth = 8;
-            this.Column1.Name = "Column1";
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // panel1
             // 
@@ -141,7 +119,6 @@
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(259, 26);
             this.textBoxSearch.TabIndex = 5;
-            this.textBoxSearch.TextChanged += new System.EventHandler(this.textBoxSearch_TextChanged_1);
             // 
             // comboBoxCategories
             // 
@@ -212,17 +189,6 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Список продукции";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(4, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(63, 54);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.DarkGray;
@@ -245,7 +211,48 @@
             this.button1.Text = "Возврат товара";
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // Catalog
+            // Article
+            // 
+            this.Article.HeaderText = "Article";
+            this.Article.MinimumWidth = 8;
+            this.Article.Name = "Article";
+            this.Article.Width = 27;
+            // 
+            // Picture
+            // 
+            this.Picture.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCellsExceptHeader;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.NullValue = null;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Picture.DefaultCellStyle = dataGridViewCellStyle5;
+            this.Picture.HeaderText = "Picture";
+            this.Picture.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.Picture.MinimumWidth = 8;
+            this.Picture.Name = "Picture";
+            this.Picture.Width = 27;
+            // 
+            // Description
+            // 
+            this.Description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Description.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Description.HeaderText = "Description";
+            this.Description.MinimumWidth = 8;
+            this.Description.Name = "Description";
+            this.Description.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(4, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(63, 54);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // EditCatalog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -254,7 +261,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Name = "Catalog";
+            this.Name = "EditCatalog";
             this.Text = "Catalog";
             this.Load += new System.EventHandler(this.Catalog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -262,8 +269,8 @@
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -284,7 +291,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridViewImageColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Article;
+        private System.Windows.Forms.DataGridViewImageColumn Picture;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
     }
 }

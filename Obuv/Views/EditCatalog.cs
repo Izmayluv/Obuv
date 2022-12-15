@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Obuv.Views
 {
-    public partial class Catalog : Form
+    public partial class EditCatalog : Form
     {
-        public Catalog()
+        public EditCatalog()
         {
             InitializeComponent();
         }
@@ -50,7 +50,7 @@ namespace Obuv.Views
         {
             var products = Helper.DbContext.Products.ToList();
 
-            if (textBoxSearch.Text != null)
+            if (!String.IsNullOrEmpty(textBoxSearch.Text))
                 products = products.Where(x => x.productName.Contains(textBoxSearch.Text)).ToList();
 
             switch (comboBoxCategories.SelectedIndex)
@@ -118,9 +118,11 @@ namespace Obuv.Views
                     bitmap = new Bitmap(bitmap, 128, 128);
                 }
 
-                dataGridView1.Rows[i].Cells[0].Value = bitmap;
+                dataGridView1.Rows[i].Cells[0].Value = products.Select(x => x.productID).ToArray()[i];
 
-                dataGridView1.Rows[i].Cells[1].Value =
+                dataGridView1.Rows[i].Cells[1].Value = bitmap;
+
+                dataGridView1.Rows[i].Cells[2].Value =
                     $"Наименование: {products.Select(x => x.productName).ToArray()[i]}\n" +
                     $"Описание: {products.Select(x => x.productDescription).ToArray()[i]}\n" +
                     $"Цена: {Round(products.Select(x => x.productCost).ToArray()[i], 0)}\n" +
@@ -168,7 +170,7 @@ namespace Obuv.Views
             authorization.Show();
         }
 
-        private void textBoxSearch_TextChanged_1(object sender, EventArgs e)
+        private void textBoxSearch_TextChanged(object sender, EventArgs e)
         {
             dataGridView1.Rows.Clear();
             LoadProductsToGrid();

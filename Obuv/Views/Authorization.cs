@@ -44,14 +44,22 @@ namespace Obuv
                 switch (customer.userRole)
                 {
                     case 1:                                 //роль: клиент
-                        Catalog catalogView = new Catalog();
+                        //Catalog catalogView = new Catalog();
+
+                        //this.Hide();
+                        //catalogView.Show();
+
+                        EditCatalog editCatalog = new EditCatalog();
 
                         this.Hide();
-                        catalogView.Show();
+                        editCatalog.Show();
                         break;
 
                     case 2:                                 //роль: менеджер
+                        //EditCatalog editCatalog = new EditCatalog();
 
+                        //this.Hide();
+                        //editCatalog.Show();
                         break;
 
                     case 3:                                 //роль: администратор
