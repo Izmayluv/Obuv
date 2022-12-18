@@ -10,17 +10,22 @@ namespace Obuv.Views
 {
     public partial class Catalog : Form
     {
-        public Catalog()
+        public Catalog(string userName, string userPatronymic, string userSurname, string userRole)
         {
             InitializeComponent();
+
+            this.userName = userName;
+            this.userPatronymic = userPatronymic;
+            this.userSurname = userSurname;
+            this.userRole = userRole;
         }
 
         private void Catalog_Load(object sender, EventArgs e)
         {
-            labelUserName.Text = Authorization.GetUserName + " ";
-            labelUserName.Text += Authorization.GetUserPatronymic + " ";
-            labelUserName.Text += Authorization.GetUserSurname + "\n";
-            labelUserName.Text += Authorization.GetUserRole;
+            labelUserName.Text = userName + " ";
+            labelUserName.Text += userPatronymic + " ";
+            labelUserName.Text += userSurname + "\n";
+            labelUserName.Text += userRole;
 
             comboBoxCategories.Items.Add("Не учитывать категорию");
             var categories = Helper.DbContext.Categories.Select(x => x.categoryName).ToList();
@@ -43,8 +48,12 @@ namespace Obuv.Views
         }
 
         private static Bitmap bitmap;
-        private static string path = @"C:\Users\ones\source\repos\gitfolder\Obuv\Obuv\Resources\";
+        public static string path = @"C:\Users\ones\source\repos\gitfolder\Obuv\Obuv\Resources\";
         private static string picName;
+        private string userName;
+        private string userPatronymic;
+        private string userSurname;
+        private string userRole;
 
         private void LoadProductsToGrid()
         {
@@ -106,16 +115,26 @@ namespace Obuv.Views
 
                 picName = products.Select(x => x.productPicture).ToArray()[i];
 
+                if (picName == "" || String.IsNullOrEmpty(picName))
+                    picName = "defPic";
+
                 if (!picName.Contains(".jpg"))
                     picName += ".jpg";
 
-                if (String.IsNullOrEmpty(picName))
-                    bitmap = Resources.defPic;
-
-                if (!String.IsNullOrEmpty(picName))
+                try
                 {
-                    bitmap = new Bitmap(path + picName);
-                    bitmap = new Bitmap(bitmap, 128, 128);
+                    if (String.IsNullOrEmpty(picName))
+                        bitmap = Resources.defPic;
+
+                    if (!String.IsNullOrEmpty(picName))
+                    {
+                        bitmap = new Bitmap(path + picName);
+                        bitmap = new Bitmap(bitmap, 128, 128);
+                    }
+                }
+                catch (Exception)
+                {
+                    bitmap = Resources.defPic;
                 }
 
                 dataGridView1.Rows[i].Cells[0].Value = bitmap;
@@ -172,6 +191,11 @@ namespace Obuv.Views
         {
             dataGridView1.Rows.Clear();
             LoadProductsToGrid();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

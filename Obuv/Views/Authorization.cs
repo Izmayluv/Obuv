@@ -16,10 +16,10 @@ namespace Obuv
 
         private static string userSurname, userPatronymic, userName, userRole;
 
-        public static string GetUserSurname => userSurname;
-        public static string GetUserPatronymic => userPatronymic;
-        public static string GetUserName => userName;
-        public static string GetUserRole => userRole;
+        //public static string GetUserSurname => userSurname;
+        //public static string GetUserPatronymic => userPatronymic;
+        //public static string GetUserName => userName;
+        //public static string GetUserRole => userRole;
 
         private void Auth(string login, string password)
         {
@@ -49,7 +49,7 @@ namespace Obuv
                         //this.Hide();
                         //catalogView.Show();
 
-                        EditCatalog editCatalog = new EditCatalog();
+                        EditCatalog editCatalog = new EditCatalog(userName, userPatronymic, userSurname, userRole);
 
                         this.Hide();
                         editCatalog.Show();
