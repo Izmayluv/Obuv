@@ -48,7 +48,7 @@ namespace Obuv.Views
         }
 
         private static Bitmap bitmap;
-        public static string path = @"C:\Users\ones\source\repos\gitfolder\Obuv\Obuv\Resources\";
+        public static string path = @"C:\Users\ones\source\repos\gitfolder\Obuv\Resources\";
         private static string picName;
         private string userName;
         private string userPatronymic;
@@ -191,11 +191,6 @@ namespace Obuv.Views
         {
             dataGridView1.Rows.Clear();
             LoadProductsToGrid();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

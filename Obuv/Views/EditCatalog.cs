@@ -49,7 +49,6 @@ namespace Obuv.Views
         }
 
         private static Bitmap bitmap;
-        private static string path = @"C:\Users\pixam\source\repos\gitfolder\Obuv\Obuv\Resources\";
         private static string picName;
         private static string article;
 
@@ -132,7 +131,7 @@ namespace Obuv.Views
 
                     if (!String.IsNullOrEmpty(picName))
                     {
-                        bitmap = new Bitmap(path + picName);
+                        bitmap = new Bitmap(Catalog.path + picName);
                         bitmap = new Bitmap(bitmap, 128, 128);
                     }
                 }
@@ -204,6 +203,7 @@ namespace Obuv.Views
 
         private void buttonAddProduct_Click(object sender, EventArgs e)
         {
+            article = null;
             EditProduct editProduct = new EditProduct(article);
             editProduct.ShowDialog();
         }

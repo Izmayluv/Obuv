@@ -32,6 +32,9 @@ namespace Obuv.Views
             if (!String.IsNullOrEmpty(article))
             {
                 textBoxArticle.Text = article;
+                textBoxArticle.Enabled = false;
+                textBoxArticle.BackColor = Color.LightGray;
+
                 var products = Helper.DbContext.Products.Where(x => x.productID == article).ToList();
 
                 textBoxName.Text = Convert.ToString(products.Select(x => x.productName).First());
@@ -58,8 +61,8 @@ namespace Obuv.Views
                 if (!picName.Contains(".jpg"))
                     picName += ".jpg";
 
-                //try
-                //{
+                try
+                {
                     if (String.IsNullOrEmpty(picName))
                         bitmap = Resources.defPic;
 
@@ -68,13 +71,13 @@ namespace Obuv.Views
                         bitmap = new Bitmap(Catalog.path + picName);
                         bitmap = new Bitmap(bitmap, 128, 128);
                     }
-                //}
-                //catch (Exception)
-                //{
-                //    //bitmap = Resources.defPic;
-                //}
+                }
+                catch (Exception)
+                {
+                    bitmap = Resources.defPic;
+                }
 
-                pictureBox1.Image = bitmap;
+            pictureBox1.Image = bitmap;
             }
             else
             {
